@@ -189,8 +189,9 @@ The prefix `tf_2_` indicates that it's a double transformed parameter.
 
 ## Various
 
-This plugin is based on an idea of @spartantri and @dune73 to decode parameters
-and expand the target lists to include the new parameter. We literally had the
-same idea in the same week independent of one another. Making this generic and
-applying it across the board via a plugin is the logical next step.
+This plugin is based on an idea of [@spartantri](https://github.com/spartantri)
+and [@dune73](https://github.com/dune73) to decode parameters and expand the
+target lists to include the new parameter. We literally had the same idea in
+the same week independent of one another. Making this generic and applying it
+across the board via a plugin is the logical next step.
 
