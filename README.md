@@ -19,13 +19,13 @@ will the transformed / decoded parameter is examined by CRS.
 
 E.g.: A transformation is the base64 decoding of a parameter:
 
-The base64 string "c3lzdGVtKCdiYXNoJyk=" decodes to "system('bash')".
+The base64 string `c3lzdGVtKCdiYXNoJyk=` decodes to `system('bash')`.
 
-"63336c7a644756744b43646959584e6f4a796b3d" is a double encoded string.
-It is a hex-encoded version of the aforementioned "c3lzdGVtKCdiYXNoJyk=".
+`63336c7a644756744b43646959584e6f4a796b3d` is a double encoded string.
+It is a hex-encoded version of the aforementioned `c3lzdGVtKCdiYXNoJyk=`.
 
 So a double decoding (hexDecode + base64Decode) will result in
-"system('bash')" again.
+`system('bash')` again.
 
 Simple generic transformations are enabled by default when installing this plugin.
 
