@@ -15,7 +15,7 @@ ModSecurity knows several transformations and the CRS generic transformations
 feature makes use of these by transforming / decoding every `ARGS` with
 the full series of transformations. If the transforming / decoding changed
 the payload (a hint that it was actually encoded), then (and only then)
-will the transformed / decoded parameter is examined by CRS.
+will the transformed / decoded parameter be examined by CRS.
 
 E.g.: A transformation is the base64 decoding of a parameter:
 
@@ -30,10 +30,10 @@ So a double decoding (hexDecode + base64Decode) will result in
 Simple generic transformations are enabled by default when installing this plugin.
 
 Double generic transformations can be enabled in in the configuration file
-`generic-transformations-config-before.conf` in the `plugins` folder.
+generic-transformations-config-before.conf` in the `plugins` folder.
 
 Generic transformations mean a severe performance impact and should be enabled
-with caution. The aforementioned base64 encoded parameter will will expand the
+with caution. The aforementioned base64 encoded parameter will expand the
 number of ARGS from 1 to 1 + 3 parameters (original parameter plus three
 decoded parameters). The same parameter at PL4 will bring a whopping 1 + 66
 parameters. 
