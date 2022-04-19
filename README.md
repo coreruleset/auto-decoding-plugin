@@ -30,7 +30,7 @@ So a double decoding (hexDecode + base64Decode) will result in
 Simple generic transformations are enabled by default when installing this plugin.
 
 Double generic transformations can be enabled in in the configuration file
-generic-transformations-config-before.conf` in the `plugins` folder.
+auto-decoding-config.conf` in the `plugins` folder.
 
 Generic transformations mean a severe performance impact and should be enabled
 with caution. The aforementioned base64 encoded parameter will expand the
@@ -52,7 +52,7 @@ Base64 and then hex-encoded payload: 63336c7a644756744b43646959584e6f4a796b3d
 
 The simple encoding is detected by default after the installation of this
 plugin. The double encoded payload detection can be enabled in the
-configuration file `generic-transformations-config-before.conf`.
+configuration file `auto-decoding-config.conf`.
 
 The rules 933160 (PL1) and 942511 (PL3) will trigger with the following test
 requests:
@@ -84,23 +84,28 @@ installations can easily be adopted to run plugins. It's really simple.
 <IfModule security2_module>
 	Include modsecurity.d/owasp-modsecurity-crs/crs-setup.conf
 
+  Include modsecurity.d/owasp-modsecurity-crs/plugins/*-config.conf
 	Include modsecurity.d/owasp-modsecurity-crs/plugins/*-before.conf
+
 	Include modsecurity.d/owasp-modsecurity-crs/rules/*.conf
+
 	Include modsecurity.d/owasp-modsecurity-crs/plugins/*-after.conf
 
 </IfModule>
 ```
 
 _Your exact config may look a bit different, namely the paths. The important
-part is to accompany the rules-include with two plugins-includes before and
+part is to accompany the rules includes with three plugin-includes before and
 after like above. Adjust the paths accordingly._
 
 ### Installation of the plugin
 
 * Copy the files in the incubator plugin `plugins` folder into the CRS plugins
   folder.
-* Enable the double-decoding of parameters in the configuration file
-  `generic-transformations-config-before.conf`.
+* The plugin will be enabled automatically.
+* You can disable the plugin conditionally by setting the
+  `tx.auto-decoding-plugin_enabled` variable. See the
+  `auto-decoding-config.conf` file for details.
 * Restart (or reload) the server.
 
 ## Performance
