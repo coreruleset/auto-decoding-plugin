@@ -1,4 +1,4 @@
-# OWASP ModSecurity Core Rule Set - Automatic Decoding Plugin
+# OWASP CRS - Automatic Decoding Plugin
 
 ## Description
 
