@@ -1,0 +1,63 @@
+schema_version: 1
+
+plugin:
+  name: "auto-decoding-plugin"
+  description: "Automatically decodes ARGS parameters to catch payloads encoded to bypass the WAF"
+  long_description: |
+    Brings automatic and generic transformation / decoding of parameters to
+    CRS with the help of ModSecurity transformations like `base64DecodeExt`.
+
+    Automatic decoding catches malicious payloads that have been encoded to
+    bypass the WAF, or because the backend is known to decode them before
+    handling. It works by transforming every `ARGS` parameter with the full
+    series of built-in ModSecurity transformations. If a transformation
+    changes the payload (a hint that it was encoded), the transformed /
+    decoded value is added to the target list of CRS rules for inspection.
+
+    Simple (single) generic transformations are enabled by default. Double
+    generic transformations (decoding twice, e.g. hex-then-base64) can be
+    enabled via `tx.auto-decoding-plugin_double_decoding`, but carry a
+    significant additional performance cost.
+  type: "official"
+  category: "utility"
+  status: "untested"
+  license: "Apache-2.0"
+  authors:
+    - name: "OWASP CRS Team"
+      url: "https://coreruleset.org"
+  repository: "https://github.com/coreruleset/auto-decoding-plugin"
+  keywords:
+    - "decoding"
+    - "transformation"
+    - "evasion"
+    - "obfuscation"
+    - "base64"
+    - "encoding"
+
+rule_id_range:
+  start: 9501000
+  end: 9501999
+
+compatibility:
+  crs_version: ">=4.0.0"
+  engines:
+    - "modsecurity2"
+    - "modsecurity3"
+
+configuration:
+  file: "plugins/auto-decoding-config.conf"
+  variables:
+    - name: "tx.auto-decoding-plugin_enabled"
+      type: "boolean"
+      default: 1
+      description: "Enable or disable the plugin (0 to disable)"
+      required: false
+
+    - name: "tx.auto-decoding-plugin_double_decoding"
+      type: "boolean"
+      default: 0
+      description: >-
+        Enable double decoding / transformation of already-transformed
+        parameters (e.g. hex-then-base64). Significant additional
+        performance impact; disabled by default.
+      required: false
